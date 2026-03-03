@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/blog_db?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 2
+    timeout: 3000ms
+  
+  main:
+    web-application-type: servlet
+
+logging:
+  level:
+    com.blog.blogapi: DEBUG
+    org.springframework.security: DEBUG
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:your-super-secret-key-change-in-production}
+    expiration-ms: 86400000 # 24 hours
+  
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+  
+  blog:
+    name: "Kotlin Blog"
+    description: "A simple blog built with Spring Boot 3 and Kotlin"
+    author: "Admin"
